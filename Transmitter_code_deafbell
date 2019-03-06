@@ -1,0 +1,33 @@
+#include <RFTransmitter.h>
+
+#define NODE_ID          1
+#define OUTPUT_PIN       11
+
+// Send on digital pin 11 and identify as node 1
+RFTransmitter transmitter(OUTPUT_PIN, NODE_ID);
+
+void setup() 
+{
+  Serial.begin(9600);
+  pinMode(7, INPUT);
+}
+
+void loop() {
+
+  int button = digitalRead(7);
+  Serial.println(button);
+  if (button==0)
+  {
+    char *msg = "O";
+    transmitter.send((byte *)msg, strlen(msg) + 1);
+      delay(5);
+  
+  //transmitter.resend((byte *)msg, strlen(msg) + 1);
+  }
+  else if (button==0)
+  {
+    delay(5);
+  }
+  
+
+}
